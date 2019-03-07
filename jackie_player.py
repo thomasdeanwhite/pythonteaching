@@ -23,13 +23,13 @@ class JackiePlayer(Player):
             board = connect_four.copy()
             board.make_move(move)
 
-            for cell in range(board.grid_size[1]):
+            for cell in range(board.grid_size[0]):
                 total = 0
-                if cell == self.player_num+1:
+                if board.board[-cell-1][i] == self.player_num+1:
                     total += 1
                 else:
                     break
-            if total > connected_current_max:
+            if total > connected_current_max and connect_four.is_valid_move(move):
                 connected_current_max = total
                 best_move = move
         return best_move
