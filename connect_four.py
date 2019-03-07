@@ -1,5 +1,6 @@
 
 from random_player import RandomPlayer
+from bad_player import BadPlayer
 
 class ConnectFour():
 
@@ -9,7 +10,7 @@ class ConnectFour():
         self.board = []
         self.turn = 0
         # two random players
-        self.players = [RandomPlayer(0), RandomPlayer(1)]
+        self.players = [RandomPlayer(0), BadPlayer(1)]
         self.playing = False
 
     def start_game(self):
@@ -122,6 +123,11 @@ class ConnectFour():
                 l.append(cell)
             c.board.append(l)
         return c
+
+    def get_winner(self):
+        if not self.playing:
+            return 1 - self.turn
+        return -1
 
 
 
