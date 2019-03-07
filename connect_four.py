@@ -12,6 +12,7 @@ class ConnectFour():
         # two random players
         self.players = [RandomPlayer(0), BadPlayer(1)]
         self.playing = False
+        self.output = True
 
     def start_game(self):
         # empty board and set turn to 0. Set playing var to True to allow moves to be made.
@@ -22,6 +23,8 @@ class ConnectFour():
         self.playing = True
 
     def print(self):
+        if not self.output:
+            return
         # print top border
         for _ in range(len(self.board[0])+1):
             print("---", end='')
@@ -61,7 +64,8 @@ class ConnectFour():
                 # is there a winner?
                 if (self.has_won(self.turn+1)):
                     self.playing = False
-                    print("Winner! Player", self.turn+1, "[X]" if self.turn == 0 else "[O]", self.players[self.turn].get_name())
+                    if self.output:
+                        print("Winner! Player", self.turn+1, "[X]" if self.turn == 0 else "[O]", self.players[self.turn].get_name())
 
                 # is there at least one free column or is it a tie?
                 game_in_progress = False
@@ -72,7 +76,8 @@ class ConnectFour():
                 # was no column free?
                 if not game_in_progress:
                     self.playing = False
-                    print("It's a draw!")
+                    if self.output:
+                        print("It's a draw!")
 
                 #change players
                 self.turn += 1
@@ -117,6 +122,7 @@ class ConnectFour():
         c.board = []
         c.playing = self.playing
         c.turn = self.turn
+        c.disable_output()
         for row in self.board:
             l = []
             for cell in row:
@@ -128,6 +134,9 @@ class ConnectFour():
         if not self.playing:
             return 1 - self.turn
         return -1
+
+    def disable_output(self):
+        self.output = False
 
 
 
