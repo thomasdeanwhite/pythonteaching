@@ -1,5 +1,6 @@
 
 from random_player import RandomPlayer
+from jackie_player import JackiePlayer
 
 class ConnectFour():
 
@@ -9,7 +10,7 @@ class ConnectFour():
         self.board = []
         self.turn = 0
         # two random players
-        self.players = [RandomPlayer(0), RandomPlayer(1)]
+        self.players = [RandomPlayer(0), JackiePlayer(1)]
         self.playing = False
 
     def start_game(self):
