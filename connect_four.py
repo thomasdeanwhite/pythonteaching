@@ -1,8 +1,10 @@
 
 from random_player import RandomPlayer
 from jackie_player import JackiePlayer
-
 from bekah_player import BekahPlayer
+
+from manual_player import ManualPlayer
+from minimax_player import MinimaxPlayer
 
 class ConnectFour():
 
@@ -12,10 +14,13 @@ class ConnectFour():
         self.board = []
         self.turn = 0
         # two random players
-        self.players = [JackiePlayer(0), BekahPlayer(1)]
+        self.players = []
 
         self.playing = False
         self.output = True
+
+    def initialize_players(self):
+        self.players = [ManualPlayer(0), MinimaxPlayer(1)]
 
     def start_game(self):
         # empty board and set turn to 0. Set playing var to True to allow moves to be made.
@@ -24,6 +29,7 @@ class ConnectFour():
 
         self.turn = 0
         self.playing = True
+        self.initialize_players()
 
     def print(self):
         if not self.output:
@@ -55,6 +61,7 @@ class ConnectFour():
     def make_move(self, move):
         if self.playing:
             # is move valid (is column full?)
+
             if self.is_valid_move(move):
                 # get row to insert piece in
                 i = 0
@@ -116,6 +123,8 @@ class ConnectFour():
 
     def is_valid_move(self, move):
         # see if move can be made in this column
+        if move < 0 or move >= self.grid_size[1]:
+            return False
         return self.board[-1][move] == 0
 
     def copy(self):
