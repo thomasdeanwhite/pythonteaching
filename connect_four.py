@@ -2,7 +2,7 @@
 from random_player import RandomPlayer
 from jackie_player import JackiePlayer
 
-from badplayer import BekahPlayer
+from bekah_player import BekahPlayer
 
 class ConnectFour():
 
@@ -12,7 +12,7 @@ class ConnectFour():
         self.board = []
         self.turn = 0
         # two random players
-        self.players = [BekahPlayer(0), JackiePlayer(1)]
+        self.players = [JackiePlayer(0), BekahPlayer(1)]
 
         self.playing = False
         self.output = True
@@ -96,8 +96,8 @@ class ConnectFour():
             for y in range(len(self.board[x])):
 
                 # get number of pieces in a row in 8 directions
-                for i in range(2):
-                    for j in range(2):
+                for i in range(3):
+                    for j in range(3):
                         # i == j == 0 could cause infinite looping on a single grid cell (adding 0 to x and y).
                         # Remove this possibility
                         if i == j and i == 1:

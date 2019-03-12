@@ -7,9 +7,10 @@ class BekahPlayer(Player):
         
     def check_moves(self, move, connect_four):
         if connect_four.is_valid_move(move):
+            connect_four.make_move(move)
             valid = 1
             connect = connect_four.max_in_row(self.player_num + 1)
-        if not connect_four.is_valid_move(move):
+        else:
             valid = 0
             connect = 0
         return(valid, connect)

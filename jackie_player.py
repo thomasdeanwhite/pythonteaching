@@ -15,11 +15,15 @@ class JackiePlayer(Player):
         board = connect_four.copy()
         board.make_move()"""
 
-        connected_current_max = 0
+        connected_current_max = -1
         best_move = 0
 
         for i in range(connect_four.grid_size[1]):  # this is the length of the grid, so can change it if wanted, rather than hard coding
             move = i
+
+            if not connect_four.is_valid_move(i):
+                continue
+
             board = connect_four.copy()
             board.make_move(move)
 
