@@ -1,10 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
-
+import sys
 names = ['students', 'demonstrators', 'lecturers']
 values = [[100, 100, 100], [50, 100, 100], [25, 100, 100], [12, 100, 100], [6, 100, 100]]
 
 def basic_plot():
+    # plot two lines
     plt.plot([1, 2, 3, 4])
     plt.plot([1, 2, 3, 4], [1, 4, 9, 16], "ro")
 
@@ -49,4 +50,26 @@ def bar_example():
     plt.ylabel('attendance percentage')
     plt.show()
 
-line_example()
+method = line_example
+method_name = "help"
+if len(sys.argv) > 1:
+    method_name = sys.argv[1]
+
+print("Calling method {}.".format(method_name))
+
+def help():
+    print("Arguments: 'bar' or 'line' or 'basic'")
+
+methods = {
+    "bar":bar_example,
+    "line":line_example,
+    "basic":basic_plot,
+    "help":help
+}
+
+if method_name in methods:
+    method = methods[method_name]
+else:
+    method = help
+
+method()
